@@ -1,0 +1,233 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Admin panel</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+        rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+        crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+          crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+<!--------------------------------------Header--------------------------------------------------->
+
+<div class="container-fluid">
+  <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <h class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" style="font-size: 16px;">
+      <span style="font-weight: 500;" th:object="${userForHeader}" th:text="*{email}">VALUE</span>
+      <span style="font-weight: 200;">with roles:</span>
+      <span style="font-weight: 300; text-align: center;" th:object="${userForHeader}" th:text="${userForHeader.getRolesAsString()}">VALUE</span>
+    </h>
+    <ul class="navbar-nav px-3">
+      <li class="nav-item text-nowrap">
+        <a class="nav-link" href="/security/logout">Logout</a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<!-- Sidebar -->
+<div class="row">
+  <div class="col-2">
+    <br>
+    <div class="nav flex-column nav-pills" id="v-pills-tab"
+         role="tablist" aria-orientation="vertical">
+
+      <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill"
+         href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Admin</a>
+      <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill"
+         href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">User</a>
+    </div>
+  </div>
+  <div class="col-10 bg-light">
+    <div class="tab-content" id="v-pills-tabContent">
+<!-- Sidebar -->
+
+        <!------------------------------------- *** Admin Panel--------------------------------------------------->
+      <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+        <!-- Admin Panel content goes here -->
+        <div class="page-header"></div>
+        <h style="font-size: 32px; height: 90px; line-height: 90px;">Admin panel</h>
+      </div>
+
+          <!---------------------------------------- ADMIN PANEL ------------------------------------------>
+
+          <!----------------------------------------- Header -------------------------------------------------->
+      <ul class="nav nav-tabs" id="myTab" role="tablist" style="font-size: 14px;">
+        <li class="nav-item" role="presentation">
+          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Users table</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">New User</a>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+
+            <!-------------------------------------------- User Table --------------------------------------->
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+          <div class="card">
+            <h5 class="card-header">All users</h5>
+            <div class="card-body">
+              <table class="table table-striped table-sm" style="font-size: 13px;">
+                <thead>
+                  <tr>
+                      <th>ID</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>Age</th>
+                      <th>Email</th>
+                      <th>Role</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each ="user : ${users}" style="font-size: 12px; height: 30px; line-height: 30px;">
+                      <td th:text="${user.getId()}"></td>
+                      <td th:text="${user.getFirstName()}"></td>
+                      <td th:text="${user.getLastName()}"></td>
+                      <td th:text="${user.getAge()}"></td>
+                      <td th:text="${user.getEmail()}"></td>
+                      <td th:text="${user.getRolesAsString()}"></td>
+
+                      <!---------------------------------- "Edit" button ---------------------------------------------->
+                      <td>
+                        <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                                data-bs-target="#modalEdit" style="color: white; font-size: 12px; padding: 0.15rem 0.25rem; border-radius: 0.15rem"
+                                th:data-bs-target="${'#modalEdit' + user.id}">Edit
+                        </button>
+                      </td>
+
+                      <!---------------------------------- "Delete" button -------------------------------------------->
+                      <td>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                style="color: white; font-size: 12px; padding: 0.15rem 0.25rem; border-radius: 0.15rem"
+                                th:data-bs-target="${'#deleteUserModal' + user.id}">Delete
+                        </button>
+                      </td>
+
+                      <!---------------------------------Модальное окно "Edit user" ----------------------------------->
+
+                      <div class="modal fade"
+                           th:id="${'modalEdit' + user.id}">
+                        <div class="modal-dialog modal-sm modal-dialog-centered">
+                          <div class="modal-content">
+                            <form id="formEdit" method="POST"
+                                  th:action="@{'/admin/edit/{id}'(id=${user.getId()})}"
+                                  th:object="${user}">
+                              <input type="hidden" name="_method" value="PATCH" />
+                              <div class="modal-header">
+                                <h5 class="modal-title">Edit User</h5>
+
+                                <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+                                  <p th:text="${errorMessage}"></p>
+
+                                </div>
+                                <button type="button" class="btn-close"
+                                        data-bs-dismiss="modal">
+                                </button>
+                              </div>
+
+                              <div th:include="edit.html"></div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!--------------------------------- Модальное окно "Delete User" ----------------------------------------------------->
+
+                      <div class="modal fade"
+                           th:id="'deleteUserModal' + ${user.id}">
+                        <div class="modal-dialog modal-sm modal-dialog-centered">
+                          <div class="modal-content">
+                            <form id="formDelete" method="POST"
+                                  th:action="@{'/admin/users/{id}'(id=${user.getId()})}"
+                                  th:object="${user}">
+                              <input type="hidden" name="_method" value="DELETE" />
+                              <div class="modal-header">
+                                  <h5 class="modal-title">Delete User</h5>
+
+                                  <button type="button" class="btn-close"
+                                          data-bs-dismiss="modal"></button>
+                              </div>
+
+                              <div th:include="delete.html"></div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+            <!--------------------------------------------- New User -------------------------------------------------->
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+          <div class="card">
+            <h5 class="card-header">Add new user</h5>
+            <div class="card-body">
+              <!----------------------------------- New User Form ------------------------------------------------->
+              <div th:include="new.html"></div>
+            </div>
+          </div>
+        </div>
+
+        <!------------------------------------------------------- *** USER ------------------------------------------------>
+
+            <!-------------------------------------User Panel--------------------------------------------------->
+            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+              <!-- User Panel content goes here -->
+              <div class="page-header">
+                <h2>User information-page</h2>
+              </div>
+
+              <div class="card">
+              <h5 class="card-header">About user</h5>
+              <div class="card-body">
+                <table class="table table-striped table-sm">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>First Name</th>
+                      <th>Last Name</th>
+                      <th>Age</th>
+                      <th>Email</th>
+                      <th>Role</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <td th:text="${userForHeader.getId()}"></td>
+                    <td th:text="${userForHeader.getFirstName()}"></td>
+                    <td th:text="${userForHeader.getLastName()}"></td>
+                    <td th:text="${userForHeader.getAge()}"></td>
+                    <td th:text="${userForHeader.getEmail()}"></td>
+                    <td th:text="${userForHeader.getRolesAsString()}"></td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+</html>
+

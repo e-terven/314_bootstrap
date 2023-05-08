@@ -1,0 +1,14 @@
+/Users/terven/Documents/HABSIDA/Git_Module_3/314/src/main/java/com/katia/spring/security/services/CustomUserDetailsService.java
+/Users/terven/Documents/HABSIDA/Git_Module_3/314/src/main/java/com/katia/spring/security/entities/User.java
+/Users/terven/Documents/HABSIDA/Git_Module_3/314/src/main/java/com/katia/spring/security/controllers/MainController.java
+/Users/terven/Documents/HABSIDA/Git_Module_3/314/src/main/java/com/katia/spring/security/services/UserService.java
+/Users/terven/Documents/HABSIDA/Git_Module_3/314/src/main/java/com/katia/spring/security/services/RoleService.java
+/Users/terven/Documents/HABSIDA/Git_Module_3/314/src/main/java/com/katia/spring/security/configs/WebSecurityConfig.java
+/Users/terven/Documents/HABSIDA/Git_Module_3/314/src/main/java/com/katia/spring/security/configs/MvcConfig.java
+/Users/terven/Documents/HABSIDA/Git_Module_3/314/src/main/java/com/katia/spring/security/model/AuthenticationRequest.java
+/Users/terven/Documents/HABSIDA/Git_Module_3/314/src/main/java/com/katia/spring/security/Application.java
+/Users/terven/Documents/HABSIDA/Git_Module_3/314/src/main/java/com/katia/spring/security/model/UserDTO.java
+/Users/terven/Documents/HABSIDA/Git_Module_3/314/src/main/java/com/katia/spring/security/entities/Role.java
+/Users/terven/Documents/HABSIDA/Git_Module_3/314/src/main/java/com/katia/spring/security/repositories/RoleRepository.java
+/Users/terven/Documents/HABSIDA/Git_Module_3/314/src/main/java/com/katia/spring/security/repositories/UserRepository.java
+/Users/terven/Documents/HABSIDA/Git_Module_3/314/src/main/java/com/katia/spring/security/configs/SuccessUserHandler.java

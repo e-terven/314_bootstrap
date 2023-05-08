@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Edit form</title>
+
+  <link rel="stylesheet" type="text/css" href="/static/css/style.css"/>
+  <script type="text/javascript" src="/static/js/scripts.js"></script>
+</head>
+
+<body>
+<div class="modal-body text-center">
+  <div class="form-group required">
+    <div class="controls">
+
+        <label for="idEditUser" style="font-size: 14px;">
+          <strong>ID</strong>
+          <input class="form-control" style="height: 30px; width: 200px; font-size: 13px;"
+                 th:type="number"
+                 th:name="id" id="idEditUser"
+                 th:object="${user}"
+                 th:value="${user.id}" readonly>
+        </label>
+      <br>
+        <label for="editName" style="font-size: 14px;">
+          <strong>First name</strong>
+          <input class="form-control" style="height: 30px; width: 200px; font-size: 13px;"
+                 th:type="text"
+                 th:name="firstName" id="editName"
+                 th:value="${user.getFirstName()}" required
+                 minlength="1"
+                 maxlength="50">
+        </label>
+      <br>
+        <label for="editLastname" style="font-size: 14px;">
+          <strong>Last name</strong>
+          <input class="form-control" style="height: 30px; width: 200px; font-size: 13px;"
+                 th:type="text"
+                 th:name="lastName" id="editLastname"
+                 th:value="${user.getLastName()}" required
+                 minlength="1"
+                 maxlength="50">
+        </label>
+      <br>
+        <label for="editAge" style="font-size: 14px;">
+          <strong>Age</strong>
+          <input class="form-control" style="height: 30px; width: 200px; font-size: 13px;"
+                 th:type="number"
+                 th:name="age" id="editAge"
+                 th:value="${user.getAge()}" required>
+        </label>
+      <br>
+        <label for="editEmail" style="font-size: 14px;">
+          <strong>Email</strong>
+          <input class="form-control" style="height: 30px; width: 200px; font-size: 13px;"
+                 th:type="email"
+                 th:name="email" id="editEmail"
+                 th:value="${user.getEmail()}" required>
+        </label>
+      <br>
+        <label for="password" style="font-size: 14px;">
+          <strong>Password</strong>
+          <input type="password" class="form-control"
+                 name="password" required minlength="2"
+                 maxlength="20"
+                 id="password">
+        </label>
+      <br>
+
+        <label for="editUserRoles" style="font-size: 14px;" >
+          <strong>Role</strong>
+          <br>
+          <select id="editUserRoles" class="form-select" style="height: 50px; width: 200px;"
+                  name="roles" aria-label="Default select" multiple required>
+
+            <option id="roleAdmin" name="roles" value="2" style="font-size: 13px;"
+                    >ADMIN</option>
+
+            <option id="roleUser" name="roles" value="1" style="font-size: 13px;"
+                    >USER</option>
+          </select>
+        </label>
+
+      <!----------------------- "Edit user" - Footer --------------------------->
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-bottom: -30px;">Close
+        </button>
+        <button type="submit" class="btn btn-info" style="margin-bottom: -30px;">Edit
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+</body>
+</html>

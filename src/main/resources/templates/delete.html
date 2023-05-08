@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Delete form</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css"/>
+    <script type="text/javascript" src="/static/js/scripts.js"></script>
+</head>
+
+<body>
+<div class="modal-body text-center">
+    <div class="form-group required">
+        <div class="controls">
+
+            <label for="idDeleteUser" style="font-size: 14px;">
+                <strong>ID</strong>
+                <input class="form-control" style="height: 30px; width: 200px; font-size: 13px;"
+                       th:type="number"
+                       th:name="id"
+                       th:object="${user}"
+                       th:value="${user.id}" readonly
+                       id="idDeleteUser">
+            </label>
+            <br>
+            <label for="deleteName" style="font-size: 14px;">
+                <strong>First name</strong>
+                <input class="form-control" style="height: 30px; width: 200px; font-size: 13px;"
+                       th:type="text"
+                       th:name="firstName"
+                       th:value="${user.getFirstName()}" required
+                       minlength="1"
+                       maxlength="50"
+                       id="deleteName">
+            </label>
+            <br>
+            <label for="deleteLastName" style="font-size: 14px;">
+                <strong>Last name</strong>
+                <input class="form-control" style="height: 30px; width: 200px; font-size: 13px;"
+                       th:type="text"
+                       th:name="lastName"
+                       th:value="${user.getLastName()}" required
+                       minlength="1"
+                       maxlength="50"
+                       id="deleteLastName">
+            </label>
+            <br>
+            <label for="deleteAge" style="font-size: 14px;">
+                <strong>Age</strong>
+                <input class="form-control" style="height: 30px; width: 200px; font-size: 13px;"
+                       th:type="number"
+                       th:name="age"
+                       th:value="${user.getAge()}" required
+                       id="deleteAge">
+            </label>
+            <br>
+            <label for="deleteEmail" style="font-size: 14px;">
+                <strong>Email</strong>
+                <input class="form-control" style="height: 30px; width: 200px; font-size: 13px;"
+                       th:type="email"
+                       th:name="email"
+                       th:value="${user.getEmail()}" required
+                       id="deleteEmail">
+            </label>
+            <br>
+            <div class="form-group">
+                <label for="roleUserD" class="font-weight-bold">Role</label>
+
+                <select multiple class="custom-select" size="2" id="roleUserD" name="roleId">
+
+                    <option>
+                        <input type="checkbox" id="roleUser" name="roles" value="1">
+                        <label>USER</label>
+
+                        <input type="checkbox" id="roleAdmin" name="roles" value="2">
+                        <label>ADMIN</label>
+                    </option>
+
+                </select>
+            </div>
+
+            <!------------------------------ "Delete user" - Footer ------------------------------------------------------->
+
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-bottom: -30px;">Close
+            </button>
+            <button type="submit" class="btn btn-danger" style="margin-bottom: -30px;">Delete
+            </button>
+        </div>
+
+    </div>
+</div>
+</div>
+</body>
+</html>
